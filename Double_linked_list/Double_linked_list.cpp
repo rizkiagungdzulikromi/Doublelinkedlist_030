@@ -146,6 +146,6 @@ void DoubleLinkedList::hapus() {
 }
 void DoubleLinkedList::searchData() {
 	if (listEmpty() == true) {
-
+	
 	}
 }
