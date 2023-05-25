@@ -95,3 +95,13 @@ bool DoubleLinkedList::deleteNode(int rollNo) {
 	delete current;
 	return true;
 }
+
+
+bool DoubleLinkedList::listEmpty() {
+	return (START == NULL);
+}
+
+void DoubleLInkedList::ascending() {
+	if (listEmpty())
+		cout 
+}
