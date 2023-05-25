@@ -8,7 +8,7 @@ public:
 	string name;
 	Node* next;
 	Node* prev;
-}; 
+};
   
 class DoubleLinkedList {
 private:
@@ -30,7 +30,7 @@ DoubleLinkedList::DoubleLinkedList() {
 	START = NULL;
 }
 
-void DoubleLinkedList::addNode() {
+void DoubleLinkedList::addNode() { 
 	int nim;
 	string nm;
 	cout << "\nEnter the roll number of the student: ";
@@ -45,8 +45,53 @@ void DoubleLinkedList::addNode() {
 	if (START == NULL || nim <= START->noMhs) {
 		if (START != NULL && nim == START->noMhs) {
 			cout << "\nDuplicate number notcallowed" << endl;
-
+			return;
 		}
-	
+		newNode->next = START;
+		if (START != NULL)
+			START->prev = newNode;
+		newNode->prev = NULL;
+		START = newNode;
+		return;
 	}
+
+	Node* current = START;
+	while (current->next != NULL && nim > current->next->noMhs)
+		current = current->next;
+
+	if (current->next != NULL && nim == current->next->noMhs) {
+		cout << "\nDuplicate roll numbers not allowed" << endl;
+		return;
+	}
+
+	newNode->next = current->next;
+	newNode->prev = current;
+	if (current->next != NULL)
+		current->next->prev = newNode;
+	current->next = newNode;
+}
+
+bool DoubleLinkedList::search(int rollNo, Node** previous, Node** current) {
+	*previous = *current = START;
+	while (*current != NULL && rollNo != (*current)->noMhs) {
+		*previous = *current;
+		*current = (*current)->next;
+	}
+	return (*current != NULL);
+}
+
+bool DoubleLinkedList::deleteNode(int rollNo) {
+	Node* previous, * current;
+	previous = current = NULL;
+	if (search(rollNo, &previous, &current) == false)
+		return false;
+
+	if (current->next != NULL)
+		current->next->prev = previous;
+	if (previous != NULL)
+		previous->next = current->next;
+	else
+		START = current->next;
+	delete current;
+	return true;
 }
