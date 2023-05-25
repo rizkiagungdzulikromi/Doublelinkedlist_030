@@ -166,7 +166,7 @@ void DoubleLinkedList::searchData() {
 int main() {
 	DoubleLinkedList obj;
 	while (true) {
-		try {
+		try { 
 			cout << "\nMenu" << endl;
 			cout << "1. Add a record to the list" << endl;
 			cout << "2. Delete a record from the list" << endl;
